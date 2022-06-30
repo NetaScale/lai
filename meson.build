@@ -1,11 +1,4 @@
-project('lai', 'c')
-
-# One easy way to build LAI with custom flags (such as -ffreestanding,
-# -mcmodel=kernel, -mno-red-zone etc.)
-# is including it as a Meson subproject and using the 'sources' and 'includes'
-# variables to build your own LAI library.
-
-sources = files(
+kern_srcs += files(
     'core/error.c',
     'core/eval.c',
     'core/exec.c',
@@ -26,11 +19,4 @@ sources = files(
     'drivers/timer.c',
 )
 
-includes = include_directories('include')
-
-library = static_library('lai', sources,
-    include_directories: includes,
-    pic: false)
-
-dependency = declare_dependency(link_with: library,
-    include_directories: includes)
+kern_incs += [ include_directories('include') ]
